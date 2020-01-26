@@ -5,8 +5,8 @@ r"""Test cases
 credit_history	1
 critical	293
 delayed	88
-fully repaid	40
 fully repaid this bank	49
+fully repaid	40
 repaid	530
 <BLANKLINE>
 
