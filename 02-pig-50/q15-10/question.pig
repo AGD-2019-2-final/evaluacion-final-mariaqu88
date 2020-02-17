@@ -16,7 +16,12 @@
 -- Escriba el resultado a la carpeta `output` del directorio actual.
 -- 
 fs -rm -f -r output;
--- 
+--
+-- >>> Escriba su respuesta a partir de este punto <<<
+--
+fs -rm -f -r data.csv
+fs -put data.csv
+
 u = LOAD 'data.csv' USING PigStorage(',') 
     AS (id:int, 
         firstname:CHARARRAY, 
@@ -24,6 +29,13 @@ u = LOAD 'data.csv' USING PigStorage(',')
         birthday:CHARARRAY, 
         color:CHARARRAY, 
         quantity:INT);
---
--- >>> Escriba su respuesta a partir de este punto <<<
---
+
+
+Resp15 = FILTER u BY $4 == 'blue' AND $1 MATCHES '.*Z.*';
+Resp = FOREACH Resp15 GENERATE CONCAT($1,'\t',$4);
+DUMP Resp;
+
+
+STORE Resp INTO 'output';
+
+fs -copyToLocal output output
